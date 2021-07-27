@@ -1,13 +1,57 @@
 package ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.entidades;
 
-public class Restaurante {
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
+@Entity
+@Table(name = "Restaurante")
+public class Restaurante implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@SequenceGenerator(name = "restaurante_id_seq", sequenceName = "restaurante_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurante_id_seq")
+	@Column(name = "restaurante_id", updatable = false, nullable = false, unique = true)
 	private int id;
+	
 	private String nombre;
+	
 	private String direccion;
+	
 	private String telefono;
+	
 	private int aforo;
 	
+	@Transient
+	private List<Reserva> reserva;
+	
+	
+	public Restaurante() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Restaurante(int id, String nombre, String direccion, String telefono, int aforo, List<Reserva> reserva) {
+		this.id = id;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.aforo = aforo;
+		this.reserva = reserva;
+	}
 	
 	public int getId() {
 		return id;
@@ -38,6 +82,12 @@ public class Restaurante {
 	}
 	public void setAforo(int aforo) {
 		this.aforo = aforo;
+	}
+	
+	@Override
+	public String toString() {
+		return "Restaurante [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono
+				+ ", aforo=" + aforo + ", reserva=" + reserva + "]";
 	}
 	
 }
