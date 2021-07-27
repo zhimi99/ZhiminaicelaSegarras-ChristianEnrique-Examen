@@ -25,8 +25,6 @@ public class Reserva implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@SequenceGenerator(name = "reserva_id_seq", sequenceName = "reserva_id_seq", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reserva_id_seq")
 	@Column(name = "reserva_id", updatable = false, nullable = false, unique = true)
 	private int id;
 	

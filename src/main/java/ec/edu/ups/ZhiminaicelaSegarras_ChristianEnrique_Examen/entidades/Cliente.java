@@ -22,8 +22,6 @@ public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "cliente_id_seq", sequenceName = "cliente_id_seq", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cliente_id_seq")
 	@Column(name = "cliente_id", updatable = false, nullable = false, unique = true)
 	private int id;
 
@@ -47,7 +45,8 @@ public class Cliente implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cliente(String nombre, String apellido, String cedula, String correo, String direccion, String telefono) {
+	public Cliente(int id, String nombre, String apellido, String cedula, String correo, String direccion, String telefono) {
+		this.id =id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.cedula = cedula;
