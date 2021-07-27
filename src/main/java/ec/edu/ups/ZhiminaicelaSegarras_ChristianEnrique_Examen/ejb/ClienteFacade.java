@@ -28,7 +28,7 @@ public class ClienteFacade extends AbstractFacade<Cliente>{
 	}
 	
 	
-	public Cliente search(String cedula)throws SQLException{
+	public Cliente buscarClienteCedula(String cedula)throws SQLException{
 		cliente = new Cliente();
 		String sql = "SELECT cli FROM Cliente cli"
 				+ " WHERE cli.cedula=:cedula";
