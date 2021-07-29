@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.ejb.RestauranteFacade;
 import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.entidades.Restaurante;
 import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.utils.RestauranteTmp;
+import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.utils.claseTmp;
 
 
 @Path("/restaurante")
@@ -24,23 +25,29 @@ public class RestauranteServiceRest {
 	@Inject
 	private RestauranteFacade restauranteFacade;
 	
+	private claseTmp claseTmp;
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/guardarRestaurante")
-	public String guardarRestaurante(RestauranteTmp restauranteTmp) {
+	public Response guardarRestaurante(RestauranteTmp restauranteTmp) {
 		
+		claseTmp = new claseTmp();
 		Restaurante restaurante = new Restaurante(restauranteTmp.getNombre(), restauranteTmp.getDireccion(), restauranteTmp.getTelefono(), restauranteTmp.getAforo(), null);
 
 		try {
-
+			
+			claseTmp.setMensaje("Restaurante:  Creado Exitosamente");
+			claseTmp.setEstado(1);
+			
 			this.restauranteFacade.create(restaurante);
-			return "Restaurante:  Creado Exitosamente: codigo: "+restaurante.getId()+" \n Nombre: "+restauranteTmp.getNombre()+"., Aforo diario: "+restauranteTmp.getAforo();
+			return Response.ok(claseTmp).build();
 
 		} catch (SQLException e) {
 
 			System.out.println(e.getLocalizedMessage());
-			return "error";
+			return Response.serverError().build();
 
 		}
 		

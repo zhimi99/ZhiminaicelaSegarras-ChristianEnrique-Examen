@@ -88,8 +88,23 @@ public class Reserva implements Serializable{
 	public void setNumClientes(int numClientes) {
 		this.numClientes = numClientes;
 	}
-
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Restaurante getRestaurante() {
+		return restaurante;
+	}
+
+	public void setRestaurante(Restaurante restaurante) {
+		this.restaurante = restaurante;
+	}
+
 	@Override
 	public String toString() {
 		return "Reserva [id=" + id + ", fechaReserva=" + fechaReserva + ", hora=" + hora + ", numClientes="

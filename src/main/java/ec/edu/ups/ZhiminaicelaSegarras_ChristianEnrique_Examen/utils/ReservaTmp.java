@@ -1,10 +1,12 @@
 package ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.utils;
 
 public class ReservaTmp {
+	
     private int id;
     private String cedula;
     private int numClientes;
-    private String restaurante;
+    private RestauranteTmp restaurante;
+    private ClienteTmp cliente;
     private String fecha;
     private String hora;
 
@@ -32,15 +34,23 @@ public class ReservaTmp {
         this.numClientes = numClientes;
     }
 
-    public String getRestaurante() {
-        return restaurante;
-    }
+       public RestauranteTmp getRestaurante() {
+		return restaurante;
+	}
 
-    public void setRestaurante(String restaurante) {
-        this.restaurante = restaurante;
-    }
+	public void setRestaurante(RestauranteTmp restaurante) {
+		this.restaurante = restaurante;
+	}
 
-    public String getFecha() {
+	public ClienteTmp getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(ClienteTmp cliente) {
+		this.cliente = cliente;
+	}
+
+	public String getFecha() {
         return fecha;
     }
 

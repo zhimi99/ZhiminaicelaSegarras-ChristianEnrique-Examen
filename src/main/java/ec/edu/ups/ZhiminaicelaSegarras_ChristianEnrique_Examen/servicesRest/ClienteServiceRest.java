@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.ejb.ClienteFacade;
 import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.entidades.Cliente;
 import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.utils.ClienteTmp;
+import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.utils.claseTmp;
 
 
 @Path("/cliente")
@@ -26,11 +27,13 @@ public class ClienteServiceRest {
 	@Inject
 	private ClienteFacade clienteFacade;
 	
+	private claseTmp claseTmp;
+	
 	
 	@GET
 	@Path("/buscarCedula")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces("application/json")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Cliente buscarClienteCedula(@QueryParam("cedula") String cedula) {
 		try {
 			return clienteFacade.buscarClienteCedula(cedula);
@@ -45,6 +48,9 @@ public class ClienteServiceRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response guardarCliente(ClienteTmp clienteTmp) {
+		
+		claseTmp = new claseTmp();
+		
 		System.out.println(clienteTmp.toString());
 		Cliente cliente = new Cliente(
 				clienteTmp.getNombre(),
@@ -58,12 +64,17 @@ public class ClienteServiceRest {
 		try {
 			clienteFacade.create(cliente);
 			
-			return Response.ok("Datos Guardados Exitosamente").build();
+			
+			claseTmp.setMensaje("Datos Guardados Exitosamente");
+			claseTmp.setEstado(1);
+
+			return Response.ok(claseTmp).build();
+			
 			
 		} catch (SQLException e) {
 			
 			System.out.println(e.getLocalizedMessage());
-			return Response.ok("Datos No Guardados...Error..").build();
+			return Response.serverError().build();
 		}
 	}
 	

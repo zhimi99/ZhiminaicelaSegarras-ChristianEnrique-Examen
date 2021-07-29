@@ -30,7 +30,7 @@ public class ClienteFacade extends AbstractFacade<Cliente>{
 	
 	public Cliente buscarClienteCedula(String cedula)throws SQLException{
 		cliente = new Cliente();
-		String sql = "SELECT cli FROM cliente cli"
+		String sql = "SELECT cli FROM Cliente cli"
 				+ " WHERE cli.cedula=:cedula";
 		
 		cliente = em.createQuery(sql, Cliente.class).setParameter("cedula", cedula).getSingleResult();
