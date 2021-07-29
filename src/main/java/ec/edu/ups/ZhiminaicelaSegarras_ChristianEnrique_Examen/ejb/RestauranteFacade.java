@@ -3,6 +3,7 @@ package ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.ejb;
 import java.sql.SQLException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.entidades.Restaurante;
 
@@ -28,8 +29,13 @@ public class RestauranteFacade  extends AbstractFacade<Restaurante>{
 		String sql = "SELECT res FROM Restaurante res "
 				+ "WHERE res.nombre =:nombre";
 		System.out.println(sql+" "+nombre);
-		restaurante = em.createQuery(sql, Restaurante.class).setParameter("nombre", nombre).getSingleResult();
+		try {
+			restaurante = em.createQuery(sql, Restaurante.class).setParameter("nombre", nombre).getSingleResult();
+		} catch (NoResultException e) {
+			restaurante = null;
+		}
 		
 		return restaurante;
 	}
+
 }

@@ -1,13 +1,10 @@
 package ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.servicesRest;
 
 import java.sql.SQLException;
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.faces.annotation.FacesConfig;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,9 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.ejb.ClienteFacade;
 import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.entidades.Cliente;
+import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.utils.ClienteTmp;
 
 
 @Path("/cliente")
@@ -45,13 +42,17 @@ public class ClienteServiceRest {
 	
 	@POST
 	@Path("/guardarCliente")
-	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response guardarCliente(@FormParam("id") int id, @FormParam("nombre") String nombre, @FormParam("apellido") String apellido,
-			@FormParam("cedula") String cedula, @FormParam("correo")String correo,
-			@FormParam("direccion")String direccion, @FormParam("telefono") String telefono) {
-		
-		Cliente cliente = new Cliente(id, nombre, apellido, cedula, correo,direccion, telefono);
+	public Response guardarCliente(ClienteTmp clienteTmp) {
+		System.out.println(clienteTmp.toString());
+		Cliente cliente = new Cliente(
+				clienteTmp.getNombre(),
+				clienteTmp.getApellido(),
+				clienteTmp.getCedula(),
+				clienteTmp.getCorreo(),
+				clienteTmp.getDireccion(),
+				clienteTmp.getTelefono());
 		System.out.println(cliente.toString());
 		
 		try {

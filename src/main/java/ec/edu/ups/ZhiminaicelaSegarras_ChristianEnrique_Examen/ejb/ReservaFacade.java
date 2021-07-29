@@ -7,7 +7,10 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.entidades.Reserva;
+import ec.edu.ups.ZhiminaicelaSegarras_ChristianEnrique_Examen.entidades.Restaurante;
 
 @Stateless
 public class ReservaFacade extends AbstractFacade<Reserva>{
@@ -36,11 +39,11 @@ public class ReservaFacade extends AbstractFacade<Reserva>{
 		return lista;
 	}
 	
-	public List<Reserva> listarReservaRestaurantes(String nombre, Date fecha)throws SQLException {
+	public List<Reserva> listarReservaRestaurantes(String nombre, String fecha)throws SQLException {
 		List<Reserva> lista = new ArrayList<Reserva>();
 		
 		String sql = "SELECT rev FROM Reserva rev, Restaurante res "
-				+ "WHERE res.nombre =:nombre AND rev.fecha=:fecha";
+				+ "WHERE res.nombre =:nombre AND rev.fechaReserva=:fecha";
 		
 		lista = em.createQuery(sql, Reserva.class)
 				.setParameter("nombre", nombre)
@@ -51,11 +54,11 @@ public class ReservaFacade extends AbstractFacade<Reserva>{
 	}
 	
 	
-	public int comprobarAforoRestaurante(String nombre, Date fecha, Date hora) {
+	public int comprobarAforoRestaurante(String nombre, String fecha, String hora) {
 		List<Reserva> lista = new ArrayList<Reserva>();
 		int llenarAforo = 0;
 		String sql = "SELECT res FROM Reserva res, Restaurante ret"
-				+ " WHERE ret.nombre=:nombre AND res.restaurante=ret.id AND res.fecha=:fecha "
+				+ " WHERE ret.nombre=:nombre AND res.restaurante=ret.id AND res.fechaReserva=:fecha "
 				+ "AND res.hora=:hora";
 		lista = em.createQuery(sql, Reserva.class).setParameter("nombre", nombre).setParameter("fecha", fecha).setParameter("hora", hora).getResultList();
 		
@@ -65,6 +68,28 @@ public class ReservaFacade extends AbstractFacade<Reserva>{
 		
 		return llenarAforo;
 	}
-	
+
+	// saca las reservas de uan fecha y hora de un restaurasnte
+	public List<Reserva> reservasPorFechaHoraRestaurante(String fecha, String hora, Restaurante restaurante) {
+		String jpql = "Select r From Reserva r where r.fechaReserva = :fecha and r.hora = :hora and r.restaurante = :restaurante";
+		Query query = em.createQuery(jpql, Reserva.class);
+		query.setParameter("fechaReserva", fecha);
+		query.setParameter("hora", hora);
+		query.setParameter("restaurante", restaurante);
+		List<Reserva> reservas = query.getResultList();
+		return reservas;
+	}
+
+	// valida si el cliente ya tiene una reserva para esa fecha y a esa hora en un restaurante
+	public boolean verificarReservaPorFechaHoraRestauranteCedula(String fecha, String hora, Restaurante restaurante, String cedula) {
+		String jpql = "Select r From Reserva r where r.fechaReserva = :fecha and r.hora = :hora and r.restaurante = :restaurante and r.cliente.cedula = :cedula";
+		Query query = em.createQuery(jpql, Reserva.class);
+		query.setParameter("fechaReserva", fecha);
+		query.setParameter("hora", hora);
+		query.setParameter("restaurante", restaurante);
+		query.setParameter("cedula", cedula);
+		List<Reserva> reservas = query.getResultList();
+		return reservas.size() > 0? true: false;
+	}
 
 }

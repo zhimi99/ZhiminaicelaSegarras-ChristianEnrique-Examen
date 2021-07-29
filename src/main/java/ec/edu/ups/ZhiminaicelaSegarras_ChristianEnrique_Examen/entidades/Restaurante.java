@@ -23,6 +23,7 @@ public class Restaurante implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "restaurante_id", updatable = false, nullable = false, unique = true)
 	private int id;
 	
@@ -42,8 +43,7 @@ public class Restaurante implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Restaurante(int id, String nombre, String direccion, String telefono, int aforo, List<Reserva> reserva) {
-		this.id = id;
+	public Restaurante(String nombre, String direccion, String telefono, int aforo, List<Reserva> reserva) {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.telefono = telefono;

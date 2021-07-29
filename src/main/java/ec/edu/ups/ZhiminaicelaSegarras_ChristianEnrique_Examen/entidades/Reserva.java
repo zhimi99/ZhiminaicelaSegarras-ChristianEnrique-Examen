@@ -25,12 +25,13 @@ public class Reserva implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "reserva_id", updatable = false, nullable = false, unique = true)
 	private int id;
 	
-	private Date fechaReserva;
+	private String fechaReserva;
 	
-	private Date hora;
+	private String hora;
 	
 	private int numClientes;
 	
@@ -48,8 +49,7 @@ public class Reserva implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Reserva(int id, Date fechaReserva, Date hora,  Cliente cliente, int numClientes ,Restaurante restaurante) {
-		this.id = id;
+	public Reserva(String fechaReserva, String hora,  Cliente cliente, int numClientes ,Restaurante restaurante) {
 		this.fechaReserva = fechaReserva;
 		this.hora =  hora;
 		this.cliente = cliente;
@@ -64,19 +64,21 @@ public class Reserva implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getFechaReserva() {
+
+
+	public String getFechaReserva() {
 		return fechaReserva;
 	}
-	public void setFechaReserva(Date fechaReserva) {
+
+	public void setFechaReserva(String fechaReserva) {
 		this.fechaReserva = fechaReserva;
 	}
-	
-	
-	public Date getHora() {
+
+	public String getHora() {
 		return hora;
 	}
 
-	public void setHora(Date hora) {
+	public void setHora(String hora) {
 		this.hora = hora;
 	}
 
