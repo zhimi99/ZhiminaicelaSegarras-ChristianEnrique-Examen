@@ -26,7 +26,7 @@ public class RestauranteFacade  extends AbstractFacade<Restaurante>{
 	
 	public Restaurante buscarRestauranteNombre(String nombre)throws SQLException{
 		restaurante = new Restaurante();
-		String sql = "SELECT res FROM Restaurante res "
+		String sql = "SELECT res FROM restaurante res "
 				+ "WHERE res.nombre =:nombre";
 		System.out.println(sql+" "+nombre);
 		try {

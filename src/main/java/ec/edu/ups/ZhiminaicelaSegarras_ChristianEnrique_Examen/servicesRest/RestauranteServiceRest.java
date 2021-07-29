@@ -30,7 +30,7 @@ public class RestauranteServiceRest {
 	@Path("/guardarRestaurante")
 	public String guardarRestaurante(RestauranteTmp restauranteTmp) {
 		
-		Restaurante restaurante = new Restaurante(restauranteTmp.getNombre(), restauranteTmp.getDireccion(), restauranteTmp.getDireccion(), restauranteTmp.getAforo(), null);
+		Restaurante restaurante = new Restaurante(restauranteTmp.getNombre(), restauranteTmp.getDireccion(), restauranteTmp.getTelefono(), restauranteTmp.getAforo(), null);
 
 		try {
 

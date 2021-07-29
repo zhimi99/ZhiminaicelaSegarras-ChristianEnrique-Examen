@@ -56,15 +56,12 @@ public class ReservaTmp {
         this.hora = hora;
     }
 
-    @Override
-    public String toString() {
-        return "ReservaTmp{" +
-                "id=" + id +
-                ", cedula='" + cedula + '\'' +
-                ", numClientes=" + numClientes +
-                ", restaurante='" + restaurante + '\'' +
-                ", fecha='" + fecha + '\'' +
-                ", hora='" + hora + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "ReservaTmp [id=" + id + ", cedula=" + cedula + ", numClientes=" + numClientes + ", restaurante="
+				+ restaurante + ", fecha=" + fecha + ", hora=" + hora + ", getId()=" + getId() + ", getCedula()="
+				+ getCedula() + ", getNumClientes()=" + getNumClientes() + ", getRestaurante()=" + getRestaurante()
+				+ ", getFecha()=" + getFecha() + ", getHora()=" + getHora() + "]";
+	}
+
 }

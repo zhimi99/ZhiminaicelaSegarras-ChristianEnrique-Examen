@@ -5,6 +5,7 @@ public class RestauranteTmp {
     private int id;
     private String nombre;
     private String direccion;
+    private String telefono;
     private int aforo;
 
     public int getId() {
@@ -38,14 +39,21 @@ public class RestauranteTmp {
     public void setAforo(int aforo) {
         this.aforo = aforo;
     }
+    
+    
+	public String getTelefono() {
+		return telefono;
+	}
 
-    @Override
-    public String toString() {
-        return "ReservaTmp{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", aforo=" + aforo +
-                '}';
-    }
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	@Override
+	public String toString() {
+		return "RestauranteTmp [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono
+				+ ", aforo=" + aforo + ", getId()=" + getId() + ", getNombre()=" + getNombre() + ", getDireccion()="
+				+ getDireccion() + ", getAforo()=" + getAforo() + ", getTelefono()=" + getTelefono() + "]";
+	}
+
 }

@@ -68,14 +68,11 @@ public class ClienteTmp {
 
 	@Override
 	public String toString() {
-		return "ClienteTmp{" +
-				"id=" + id +
-				", nombre='" + nombre + '\'' +
-				", apellido='" + apellido + '\'' +
-				", cedula='" + cedula + '\'' +
-				", correo='" + correo + '\'' +
-				", direccion='" + direccion + '\'' +
-				", telefono='" + telefono + '\'' +
-				'}';
+		return "ClienteTmp [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
+				+ ", correo=" + correo + ", direccion=" + direccion + ", telefono=" + telefono + ", getId()=" + getId()
+				+ ", getNombre()=" + getNombre() + ", getApellido()=" + getApellido() + ", getCedula()=" + getCedula()
+				+ ", getCorreo()=" + getCorreo() + ", getDireccion()=" + getDireccion() + ", getTelefono()="
+				+ getTelefono() + "]";
 	}
+
 }
